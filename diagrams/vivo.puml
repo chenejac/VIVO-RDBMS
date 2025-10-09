@@ -1,0 +1,168 @@
+@startuml
+
+' class Language {
+'   String code
+'   String name
+' }
+
+class Geolocation {
+    String code
+    String name
+}
+
+Geolocation "*" --> "0..1" Geolocation:partOf
+
+class ResearchArea {
+    String name
+    String description
+}
+
+' ResearchArea "*" --> "0..1" ResearchArea:partOf
+
+
+class Person {
+    String firstname
+    String otherName
+    String lastname
+    String preferredTitle
+    ' FACULTY_MEMBER
+    ' FACULTY_MEMBER_EMERITUS
+    ' LIBRARIAN_EMERITUS
+    ' PROFESOR_EMERITUS
+    ' LIBRARIAN
+    ' NON_ACADEMIC
+    ' NON_FACULTY_ACADEMIC
+    ' POSTDOC
+    String type
+    String orcid
+}
+
+Person "*" --> "*" ResearchArea:researchAreas
+
+'    enum PersonType {
+'        FACULTY_MEMBER
+'        FACULTY_MEMBER_EMERITUS
+'        LIBRARIAN_EMERITUS
+'        PROFESOR_EMERITUS
+'        LIBRARIAN
+'        NON_ACADEMIC
+'        NON_FACULTY_ACADEMIC
+'        POSTDOC
+'    }
+
+class Position {
+    ' instructor, professor, etc.
+    String title
+    ' faculty position, postdoctoral position
+    String type
+    Integer startYear
+    Integer endYear
+}
+
+'  enum PositionType {
+'      FACULTY_ADMINISTRATIVE_POSITION
+'      FACULTY_POSITION
+'      LIBRARIAN_POSITION
+'      NON_ACADEMIC_POSITION
+'      NON_FACULTY_ACADEMIC_POSITION
+'     POSITION
+'      POSTDOCTORAL_POSITION
+'      PRIMARY_POSITION
+'  }
+
+Position "*" --> "1" Person : personInvolved
+Position "*" --> "1" OrganisationUnit : organisationUnit
+
+class OrganisationUnit {
+    String name
+    String abbreviation
+    ' department, division, center, government agency, etc.
+    String type
+    ' String keywords
+    ' Set<OrganisationUnit> parts
+    String ror
+}
+
+' OrganisationUnit "*" --> "*" ResearchArea:researchAreas
+OrganisationUnit "*" --> "*" Geolocation:countryOrPlace
+OrganisationUnit "*" --> "0..1" OrganisationUnit:partOf
+
+
+'  enum OrganisationUnitType {
+'    GOVERNMENT_AGENCY
+'    CENTER
+'  }
+
+
+class Document {
+    String title
+    Integer publicationYear
+    String doi
+    String isbn
+    String pageStart
+    String pageEnd
+    String volume
+    String issue
+    ' Set<Editorship> editors
+}
+
+Document "*" --> "*" ResearchArea:researchAreas
+Document "*" --> "0..1" Document:partOf
+Document "*" --> "0..1" OrganisationUnit:publisher
+
+class Authorship {
+    Integer orderNumber
+    Boolean correspondingAuthor
+    String displayAuthorName
+    ' String displayAffiliation
+}
+
+Person "0..1" <-- "*" Authorship
+Document "1" <-- "*" Authorship
+
+class Journal {
+    String title
+    String abbreviation
+    String issn
+    ' Set<Editorship> editors
+}
+
+'Journal "*" --> "*" ResearchArea:researchAreas
+Journal "*" --> "0..1" OrganisationUnit:publisher
+Document "*" --> "0..1" Journal:journal
+
+class Event {
+    String name
+    String abbreviation
+    Set<ResearchArea> researchAreas
+    Calendar startDate
+    Calendar endDate
+}
+
+Event "*" --> "*" ResearchArea:researchAreas
+Event "*" --> "*" Geolocation:countryOrPlace
+Document "*" --> "0..1" Event:presentedAt
+
+class Grant {
+    String name
+    String identifier
+    Integer startYear
+    Integer endYear
+    String totalAwardAmount
+}
+
+'Grant "*" --> "*" ResearchArea:researchAreas
+Grant "*" --> "0..1" OrganisationUnit:awardedBy
+Grant "*" --> "*" Geolocation:countryOrPlace
+Grant "*" --> "0..1" Grant:partOf
+
+class Contributorship {
+    String roleType
+}
+
+Contributorship "*" --> "1" Person:personInvolved
+Contributorship "*" --> "1" Grant:grant
+
+Document "*" --> "*" Grant:supportedBy
+
+@enduml
