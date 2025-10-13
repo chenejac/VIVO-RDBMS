@@ -97,7 +97,7 @@ entity Citations {
 }
 
 Document }o--o{ ResearchArea
-Document }o--|| Citation
+Document }o--|| Citations
 Document |o--o{ Document
 Document |o--o{ OrganisationUnit
 
