@@ -1,0 +1,6 @@
+grant_id,name,identifier,start_year,end_year,total_award_amount,awarded_by_organisation_unit_id,geolocation_id,part_of_grant_id
+1,National Science Grant Y,identifier_32,2019,2017,2500000.0,1,4,4
+2,Climate Research Initiative,identifier_69,1991,2021,2089999.9999999998,1,3,5
+3,AI Innovation Programme,identifier_11,2000,2021,1170000.0,2,1,3
+4,Climate Research Initiative,identifier_91,2010,1995,2610000.0,3,1,2
+5,HorizonEurope Project X,identifier_66,2015,1996,2530000.0,1,5,1

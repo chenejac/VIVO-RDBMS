@@ -1,0 +1,6 @@
+advising_relationship_type,advisor_person_id,student_person_id
+Undergraduate Advising,4,3
+Advising,5,3
+Advising,2,3
+Graduate Advising,2,4
+Undergraduate Advising,4,3

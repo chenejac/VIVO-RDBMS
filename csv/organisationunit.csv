@@ -1,0 +1,6 @@
+organisation_unit_id,name,abbreviation,type,ror,geolocation_id,super_organisation_unit_id
+1,Open Data Lab,ODL,NGO,https://ror.org/ly7hgedhi,2,2
+2,Institute of AI,IOA,Research Institute,https://ror.org/i75h44ie1,5,4
+3,Faculty of Science,FOS,Faculty,https://ror.org/9w3cun6aw,2,4
+4,University of Belgrade,UBG,University,https://ror.org/xdbend0fv,3,3
+5,Research Center VINCA,RCV,Research Center,https://ror.org/nw2u0nwfr,1,2

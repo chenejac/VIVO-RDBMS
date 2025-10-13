@@ -1,168 +1,176 @@
 @startuml
 
-' class Language {
-'   String code
-'   String name
-' }
-
-class Geolocation {
-    String code
-    String name
+entity Geolocation {
+    geolocation_id : number <<generated>>
+    --
+    code : text
+    name : text
 }
 
-Geolocation "*" --> "0..1" Geolocation:partOf
+Geolocation |o--o{ Geolocation
 
-class ResearchArea {
-    String name
-    String description
+entity ResearchArea {
+    research_area_id : number <<generated>>
+    --
+    name : text
+    description : text
+    --
+    super_research_area_id : number <<FK>>
 }
 
-' ResearchArea "*" --> "0..1" ResearchArea:partOf
+ResearchArea |o--o{ ResearchArea
 
-
-class Person {
-    String firstname
-    String otherName
-    String lastname
-    String preferredTitle
-    ' FACULTY_MEMBER
-    ' FACULTY_MEMBER_EMERITUS
-    ' LIBRARIAN_EMERITUS
-    ' PROFESOR_EMERITUS
-    ' LIBRARIAN
-    ' NON_ACADEMIC
-    ' NON_FACULTY_ACADEMIC
-    ' POSTDOC
-    String type
-    String orcid
+entity Person {
+    person_id : number <<generated>>
+    --
+    firstname : text
+    other_name : text
+    lastname : text
+    orcid : text
+    --
+    position_id : number <<FK>>
 }
 
-Person "*" --> "*" ResearchArea:researchAreas
-
-'    enum PersonType {
-'        FACULTY_MEMBER
-'        FACULTY_MEMBER_EMERITUS
-'        LIBRARIAN_EMERITUS
-'        PROFESOR_EMERITUS
-'        LIBRARIAN
-'        NON_ACADEMIC
-'        NON_FACULTY_ACADEMIC
-'        POSTDOC
-'    }
-
-class Position {
-    ' instructor, professor, etc.
-    String title
-    ' faculty position, postdoctoral position
-    String type
-    Integer startYear
-    Integer endYear
+entity Advisorship {
+    advising_relationship_type : text
+    advisor_person_id : number <<FK>>
+    student_person_id : number <<FK>>
 }
 
-'  enum PositionType {
-'      FACULTY_ADMINISTRATIVE_POSITION
-'      FACULTY_POSITION
-'      LIBRARIAN_POSITION
-'      NON_ACADEMIC_POSITION
-'      NON_FACULTY_ACADEMIC_POSITION
-'     POSITION
-'      POSTDOCTORAL_POSITION
-'      PRIMARY_POSITION
-'  }
+Person }o--o| Advisorship
+Person }o--o| Advisorship
 
-Position "*" --> "1" Person : personInvolved
-Position "*" --> "1" OrganisationUnit : organisationUnit
+Person }o--o{ ResearchArea
 
-class OrganisationUnit {
-    String name
-    String abbreviation
-    ' department, division, center, government agency, etc.
-    String type
-    ' String keywords
-    ' Set<OrganisationUnit> parts
-    String ror
+entity Position {
+    position_id : number <<generated>>
+    --
+    title : text
+    type : text
+    start_year : number
+    end_year : number
 }
 
-' OrganisationUnit "*" --> "*" ResearchArea:researchAreas
-OrganisationUnit "*" --> "*" Geolocation:countryOrPlace
-OrganisationUnit "*" --> "0..1" OrganisationUnit:partOf
+Position ||--o{ Person
 
-
-'  enum OrganisationUnitType {
-'    GOVERNMENT_AGENCY
-'    CENTER
-'  }
-
-
-class Document {
-    String title
-    Integer publicationYear
-    String doi
-    String isbn
-    String pageStart
-    String pageEnd
-    String volume
-    String issue
-    ' Set<Editorship> editors
+entity OrganisationUnit {
+    organisation_unit_id : number <<generated>>
+    --
+    name : text
+    abbreviation : text
+    type : text
+    ror : text
+    --
+    geolocation_id : number <<FK>>
+    super_organisation_unit_id : number <<FK>>
 }
 
-Document "*" --> "*" ResearchArea:researchAreas
-Document "*" --> "0..1" Document:partOf
-Document "*" --> "0..1" OrganisationUnit:publisher
+OrganisationUnit |o--o{ Geolocation
+OrganisationUnit |o--o{ OrganisationUnit
 
-class Authorship {
-    Integer orderNumber
-    Boolean correspondingAuthor
-    String displayAuthorName
-    ' String displayAffiliation
+
+entity Document {
+    document_id : number <<generated>>
+    --
+    title : text
+    publication_year : number
+    doi : text
+    isbn : text
+    page_start : text
+    page_end : text
+    volume : text
+    issue : text
+    --
+    part_of_document_id : number <<FK>>
+    publisher_organisation_unit_id : number <<FK>>
+    venue_journal_id : number <<FK>>
+    presented_at_event_id : number <<FK>>
 }
 
-Person "0..1" <-- "*" Authorship
-Document "1" <-- "*" Authorship
-
-class Journal {
-    String title
-    String abbreviation
-    String issn
-    ' Set<Editorship> editors
+entity Citations {
+    citations_id : number <<generated>>
+    --
+    number : number
+    source : text
+    --
+    document_id : number <<FK>>
 }
 
-'Journal "*" --> "*" ResearchArea:researchAreas
-Journal "*" --> "0..1" OrganisationUnit:publisher
-Document "*" --> "0..1" Journal:journal
+Document }o--o{ ResearchArea
+Document }o--|| Citation
+Document |o--o{ Document
+Document |o--o{ OrganisationUnit
 
-class Event {
-    String name
-    String abbreviation
-    Set<ResearchArea> researchAreas
-    Calendar startDate
-    Calendar endDate
+entity Authorship {
+    order_number : number
+    corresponding_author : boolean
+    display_author_name : text
+    --
+    person_id : number <<FK>>
+    document_id : number <<FK>>
 }
 
-Event "*" --> "*" ResearchArea:researchAreas
-Event "*" --> "*" Geolocation:countryOrPlace
-Document "*" --> "0..1" Event:presentedAt
+Person }o--o| Authorship
+Document }o--|| Authorship
 
-class Grant {
-    String name
-    String identifier
-    Integer startYear
-    Integer endYear
-    String totalAwardAmount
+entity Journal {
+    journal_id : number <<generated>>
+    --
+    title : text
+    abbreviation : text
+    issn : text
+    --
+    publisher_organisation_unit_id : number <<FK>>
 }
 
-'Grant "*" --> "*" ResearchArea:researchAreas
-Grant "*" --> "0..1" OrganisationUnit:awardedBy
-Grant "*" --> "*" Geolocation:countryOrPlace
-Grant "*" --> "0..1" Grant:partOf
+Journal }o--o{ ResearchArea
+Journal |o--o{ OrganisationUnit
+Journal }o--o| Document
 
-class Contributorship {
-    String roleType
+entity Event {
+    event_id : number <<generated>>
+    --
+    name : text
+    abbreviation : text
+    start_date : datetime
+    end_date : datetime
+    --
+    geolocation_id : number <<FK>>
 }
 
-Contributorship "*" --> "1" Person:personInvolved
-Contributorship "*" --> "1" Grant:grant
+Event }o--o{ ResearchArea
+Event |o--o{ Geolocation
+Document |o--o{ Event
 
-Document "*" --> "*" Grant:supportedBy
+entity Grant {
+    grant_id : number <<generated>>
+    --
+    name : text
+    identifier : text
+    start_year : number
+    end_year : number
+    total_award_amount : text
+    --
+    awarded_by_organisation_unit_id : number <<FK>>
+    geolocation_id : number <<FK>>
+    part_of_grant_id : number <<FK>>
+}
+
+Grant }o--o{ ResearchArea
+Grant |o--o{ OrganisationUnit
+Grant |o--o{ Geolocation
+Grant |o--o{ Grant
+
+entity Investigatorship {
+    role_type : text
+    --
+    person_id : number <<FK>>
+    grant_id : number <<FK>>
+}
+
+Investigatorship ||--o{ Person
+Investigatorship ||--o{ Grant
+
+Document }o--o{ Grant
 
 @enduml

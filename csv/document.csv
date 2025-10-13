@@ -1,0 +1,6 @@
+document_id,title,publication_year,doi,isbn,page_start,page_end,volume,issue,part_of_document_id,publisher_organisation_unit_id,venue_journal_id,presented_at_event_id
+1,Quantum Research,1991,10.804/4099,8392859663,121,131,174,14,2,5,4,2
+2,Cloud Computing,1997,10.394/7520,6336595590,68,78,133,54,5,3,4,2
+3,Quantum Research,1991,10.306/4790,2241062936,174,177,86,98,1,5,1,5
+4,Knowledge Graphs,1991,10.172/4778,2134292310,62,66,23,91,1,1,3,1
+5,Knowledge Graphs,1991,10.433/3165,8350392886,87,106,140,140,5,4,1,1

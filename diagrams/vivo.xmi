@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMI xmi.version="2.1" xmlns:uml="http://www.omg.org/spec/UML/20090901">
+  <uml:Model xmi:type="uml:Model" name="PlantUML2Modelio">
+    <packagedElement xmi:type="uml:Package" name="Entities">
+      <packagedElement xmi:type="uml:Class" name="Geolocation">
+        <ownedAttribute xmi:type="uml:Property" name="geolocation_id" type="number"/>
+        <ownedAttribute xmi:type="uml:Property" name="code" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="name" type="text"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" name="ResearchArea">
+        <ownedAttribute xmi:type="uml:Property" name="research_area_id" type="number"/>
+        <ownedAttribute xmi:type="uml:Property" name="name" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="description" type="text"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" name="Person">
+        <ownedAttribute xmi:type="uml:Property" name="person_id" type="number"/>
+        <ownedAttribute xmi:type="uml:Property" name="firstname" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="other_name" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="lastname" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="preferred_title" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="type" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="orcid" type="text"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" name="Position">
+        <ownedAttribute xmi:type="uml:Property" name="position_id" type="number"/>
+        <ownedAttribute xmi:type="uml:Property" name="title" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="type" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="start_year" type="number"/>
+        <ownedAttribute xmi:type="uml:Property" name="end_year" type="number"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" name="OrganisationUnit">
+        <ownedAttribute xmi:type="uml:Property" name="organisation_unit_id" type="number"/>
+        <ownedAttribute xmi:type="uml:Property" name="name" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="abbreviation" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="type" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="ror" type="text"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" name="Document">
+        <ownedAttribute xmi:type="uml:Property" name="document_id" type="number"/>
+        <ownedAttribute xmi:type="uml:Property" name="title" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="publication_year" type="number"/>
+        <ownedAttribute xmi:type="uml:Property" name="doi" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="isbn" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="page_start" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="page_end" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="volume" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="issue" type="text"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" name="Authorship">
+        <ownedAttribute xmi:type="uml:Property" name="order_number" type="number"/>
+        <ownedAttribute xmi:type="uml:Property" name="corresponding_author" type="boolean"/>
+        <ownedAttribute xmi:type="uml:Property" name="display_author_name" type="text"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" name="Journal">
+        <ownedAttribute xmi:type="uml:Property" name="journal_id" type="number"/>
+        <ownedAttribute xmi:type="uml:Property" name="title" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="abbreviation" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="issn" type="text"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" name="Event">
+        <ownedAttribute xmi:type="uml:Property" name="event_id" type="number"/>
+        <ownedAttribute xmi:type="uml:Property" name="name" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="abbreviation" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="start_date" type="datetime"/>
+        <ownedAttribute xmi:type="uml:Property" name="end_date" type="datetime"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" name="Grant">
+        <ownedAttribute xmi:type="uml:Property" name="grant_id" type="number"/>
+        <ownedAttribute xmi:type="uml:Property" name="name" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="identifier" type="text"/>
+        <ownedAttribute xmi:type="uml:Property" name="start_year" type="number"/>
+        <ownedAttribute xmi:type="uml:Property" name="end_year" type="number"/>
+        <ownedAttribute xmi:type="uml:Property" name="total_award_amount" type="text"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Class" name="Contributorship">
+        <ownedAttribute xmi:type="uml:Property" name="roleType" type="text"/>
+      </packagedElement>
+    </packagedElement>
+  </uml:Model>
+</XMI>
