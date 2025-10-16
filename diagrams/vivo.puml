@@ -80,6 +80,7 @@ entity Document {
     page_end : text
     volume : text
     issue : text
+	open_access : boolean
     --
     part_of_document_id : number <<FK>>
     publisher_organisation_unit_id : number <<FK>>
